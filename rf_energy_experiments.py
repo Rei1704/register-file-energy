@@ -34,9 +34,9 @@ warnings.filterwarnings("ignore")
 
 TARGETS = ["read_nj", "write_nj", "leak_mw", "area_mm2", "access_ns"]
 
-# ----------------------------------------------------------------------------
+
 # CACTI sweep
-# ----------------------------------------------------------------------------
+
 DESIGN_SPACE = dict(
     entries=[32, 64, 128, 256, 512],            # number of registers
     width=[32, 64, 128],                        # bits per register
@@ -103,9 +103,9 @@ def sweep():
     print(f"{len(df)} designs in {time.time() - t:.0f}s, failed: {df.read_nj.isna().sum()}")
 
 
-# ----------------------------------------------------------------------------
+
 # Models and metrics
-# ----------------------------------------------------------------------------
+
 def feats(d):
     return pd.DataFrame({"log_entries": np.log2(d.entries), "log_width": np.log2(d.width),
                          "rports": d.rports, "wports": d.wports, "log_tech": np.log(d.tech_nm)})
@@ -163,9 +163,9 @@ def load():
     return df
 
 
-# ----------------------------------------------------------------------------
+
 # Experiments
-# ----------------------------------------------------------------------------
+
 def powerlaw_exponents():
     df = load()
     X = np.log(pd.DataFrame({"entries": df.entries, "width": df.width,
